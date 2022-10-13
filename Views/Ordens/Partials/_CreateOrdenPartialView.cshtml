@@ -1,0 +1,54 @@
+@{
+    List<SelectListItem> nombres = (List<SelectListItem>)ViewBag.nombres;
+}
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model MarzanStored.Models.Orden
+
+
+<div class="modal fade" id="createOrden">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title" id="createOrdenLabel">Crear Orden </h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>X</span>
+                </button>
+            </div>
+            <form asp-action="Create">
+                <div class="modal-body">
+
+                    <div class="form-group">
+
+                        <div class="row">
+                            <input type="hidden" asp-for="Clientes" value="@User.Identity.Name" />
+                            <div class="col-lg-4">
+                                @Html.DropDownList("IdProductos", nombres, "Select", new {@class="form-control"})
+                            </div>
+                        </div>
+
+                        <label asp-for="Cantidad"> </label>
+                        <input type="number" asp-for="Cantidad" class="form-control" />
+                        <span asp-validation-for="Cantidad" class="text-danger"></span>
+                    </div>
+
+                    @*@Html.DropDownListFor(x => x.Nombre);*@
+
+
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"> Cerrar</button>
+                    <button type="button" class="btn btn-success" data-save="modal"> Guardar</button>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</div>
